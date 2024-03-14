@@ -56,6 +56,21 @@ namespace OperationResult.Benchmarks
             return acc;
         }
 
+        [Benchmark(Description = "Result<TResult, TError> Match()")]
+        public int ResultMatchTest()
+        {
+            int acc = 0;
+            for (int i = 0; i < 100; i++)
+            {
+                var res = GetResult(i);
+                res.Match(
+                    onSuccess: r => acc += r.Value,
+                    onError: r => { }
+                );
+            }
+            return acc;
+        }
+
         private Tuple<int, string> GetTuple(int arg)
         {
             if (arg < SuccessRate)
@@ -106,5 +121,6 @@ namespace OperationResult.Benchmarks
             }
             return acc;
         }
+
     }
 }

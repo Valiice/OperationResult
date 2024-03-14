@@ -39,5 +39,41 @@ namespace OperationResult
         {
             return new ErrorTag<TError>(error);
         }
+
+        // Pattern matching for Result<T>
+        public static void Match<T>(this Result<T> result, Action<Result<T>> onSuccess, Action<Result<T>> onError)
+        {
+            if (result.IsSuccess)
+                onSuccess(result);
+            else
+                onError(result);
+        }
+
+        // Pattern matching for Result<T, TError>
+        public static void Match<T, TError>(this Result<T, TError> result, Action<Result<T, TError>> onSuccess, Action<Result<T, TError>> onError)
+        {
+            if (result.IsSuccess)
+                onSuccess(result);
+            else
+                onError(result);
+        }
+
+        // Pattern matching for Result<T>
+        public static TResult Match<T, TResult>(this Result<T> result, Func<Result<T>, TResult> onSuccess, Func<Result<T>, TResult> onError)
+        {
+            if (result.IsSuccess)
+                return onSuccess(result);
+            else
+                return onError(result);
+        }
+
+        // Pattern matching for Result<T, TError>
+        public static TResult Match<T, TError, TResult>(this Result<T, TError> result, Func<Result<T, TError>, TResult> onSuccess, Func<Result<T, TError>, TResult> onError)
+        {
+            if (result.IsSuccess)
+                return onSuccess(result);
+            else
+                return onError(result);
+        }
     }
 }
