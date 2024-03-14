@@ -2,13 +2,13 @@
 {
     public struct SuccessTag { }
 
-    public struct SuccessTag<TResult>
+    public readonly struct SuccessTag<TResult>
     {
-        internal readonly TResult Value;
+        internal readonly TResult _value;
 
         internal SuccessTag(TResult result)
         {
-            Value = result;
+            _value = result;
         }
     }
 }

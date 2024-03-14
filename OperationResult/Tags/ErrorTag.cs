@@ -2,13 +2,13 @@
 {
     public struct ErrorTag { }
 
-    public struct ErrorTag<TError>
+    public readonly struct ErrorTag<TError>
     {
-        internal readonly TError Error;
+        internal readonly TError _error;
 
         internal ErrorTag(TError error)
         {
-            Error = error;
+            _error = error;
         }
     }
 }

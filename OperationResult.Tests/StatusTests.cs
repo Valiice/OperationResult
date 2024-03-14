@@ -1,12 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static OperationResult.Helpers;
+﻿using static OperationResult.Helpers;
+using Assert = Xunit.Assert;
 
 namespace OperationResult.Tests
 {
-    [TestClass]
     public class StatusTests
     {
-        private Status GetStatus(int arg)
+        private static Status GetStatus(int arg)
         {
             if (arg == 1)
             {
@@ -15,35 +14,35 @@ namespace OperationResult.Tests
             return Error();
         }
 
-        [TestMethod]
+        [Fact]
         public void TestStatusWithoutError()
         {
             var res1 = GetStatus(1);
 
-            Assert.IsTrue(res1);
-            Assert.IsTrue(res1.IsSuccess);
-            Assert.IsFalse(res1.IsError);
-            
+            Assert.True(res1);
+            Assert.True(res1.IsSuccess);
+            Assert.False(res1.IsError);
+
             var res2 = GetStatus(2);
 
-            Assert.IsFalse(res2);
-            Assert.IsFalse(res2.IsSuccess);
-            Assert.IsTrue(res2.IsError);
+            Assert.False(res2);
+            Assert.False(res2.IsSuccess);
+            Assert.True(res2.IsError);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestStatusWithoutErrorImplicitToBool()
         {
             bool isSuccess;
 
             isSuccess = GetStatus(1);
-            Assert.IsTrue(isSuccess);
+            Assert.True(isSuccess);
 
             isSuccess = GetStatus(2);
-            Assert.IsFalse(isSuccess);
+            Assert.False(isSuccess);
         }
 
-        private Status<string> GetStatusOrError(int arg)
+        private static Status<string> GetStatusOrError(int arg)
         {
             if (arg == 1)
             {
@@ -52,37 +51,37 @@ namespace OperationResult.Tests
             return Error("Invalid Operation");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestStatusWithError()
         {
             var res1 = GetStatusOrError(1);
 
-            Assert.IsTrue(res1);
-            Assert.IsTrue(res1.IsSuccess);
-            Assert.IsFalse(res1.IsError);
-            Assert.IsNull(res1.Error);
-            
+            Assert.True(res1);
+            Assert.True(res1.IsSuccess);
+            Assert.False(res1.IsError);
+            Assert.Null(res1.Error);
+
             var res2 = GetStatusOrError(2);
 
-            Assert.IsFalse(res2);
-            Assert.IsFalse(res2.IsSuccess);
-            Assert.IsTrue(res2.IsError);
-            Assert.AreEqual(res2.Error, "Invalid Operation");
+            Assert.False(res2);
+            Assert.False(res2.IsSuccess);
+            Assert.True(res2.IsError);
+            Assert.Equal("Invalid Operation", res2.Error);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestStatusWithErrorImplicitToBool()
         {
             bool isSuccess;
 
             isSuccess = GetStatusOrError(1);
-            Assert.IsTrue(isSuccess);
+            Assert.True(isSuccess);
 
             isSuccess = GetStatusOrError(2);
-            Assert.IsFalse(isSuccess);
+            Assert.False(isSuccess);
         }
 
-        private Status<string, int> GetStatusOrMultipleErrors(int arg)
+        private static Status<string, int> GetStatusOrMultipleErrors(int arg)
         {
             if (arg == 1)
             {
@@ -95,48 +94,48 @@ namespace OperationResult.Tests
             return Error("Invalid Operation");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestStatusWithMultipleErrors()
         {
             var res1 = GetStatusOrMultipleErrors(1);
 
-            Assert.IsTrue(res1);
-            Assert.IsTrue(res1.IsSuccess);
-            Assert.IsFalse(res1.IsError);
-            Assert.IsNull(res1.Error);
+            Assert.True(res1);
+            Assert.True(res1.IsSuccess);
+            Assert.False(res1.IsError);
+            Assert.Null(res1.Error);
 
             var res2 = GetStatusOrMultipleErrors(2);
 
-            Assert.IsFalse(res2);
-            Assert.IsFalse(res2.IsSuccess);
-            Assert.IsTrue(res2.IsError);
-            Assert.IsTrue(res2.HasError<int>());
-            Assert.AreEqual(res2.Error, 404);
-            Assert.AreEqual(res2.GetError<int>(), 404);
+            Assert.False(res2);
+            Assert.False(res2.IsSuccess);
+            Assert.True(res2.IsError);
+            Assert.True(res2.HasError<int>());
+            Assert.Equal(404, res2.Error);
+            Assert.Equal(404, res2.GetError<int>());
 
             var res3 = GetStatusOrMultipleErrors(3);
 
-            Assert.IsFalse(res3);
-            Assert.IsFalse(res3.IsSuccess);
-            Assert.IsTrue(res3.IsError);
-            Assert.IsTrue(res3.HasError<string>());
-            Assert.AreEqual(res3.Error, "Invalid Operation");
-            Assert.AreEqual(res3.GetError<string>(), "Invalid Operation");
+            Assert.False(res3);
+            Assert.False(res3.IsSuccess);
+            Assert.True(res3.IsError);
+            Assert.True(res3.HasError<string>());
+            Assert.Equal("Invalid Operation", res3.Error);
+            Assert.Equal("Invalid Operation", res3.GetError<string>());
         }
 
-        [TestMethod]
+        [Fact]
         public void TestStatusWithMultipleErrorsImplicitToBool()
         {
             bool isSuccess;
 
             isSuccess = GetStatusOrMultipleErrors(1);
-            Assert.IsTrue(isSuccess);
+            Assert.True(isSuccess);
 
             isSuccess = GetStatusOrMultipleErrors(2);
-            Assert.IsFalse(isSuccess);
+            Assert.False(isSuccess);
 
             isSuccess = GetStatusOrMultipleErrors(3);
-            Assert.IsFalse(isSuccess);
+            Assert.False(isSuccess);
         }
     }
 }

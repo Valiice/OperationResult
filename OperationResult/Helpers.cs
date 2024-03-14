@@ -4,14 +4,14 @@ namespace OperationResult
 {
     public static class Helpers
     {
-        private static SuccessTag SuccessTag = new SuccessTag();
+        private static readonly SuccessTag _successTag = new();
 
         /// <summary>
         /// Create "Success" Status or Result
         /// </summary>
         public static SuccessTag Ok()
         {
-            return SuccessTag;
+            return _successTag;
         }
 
         /// <summary>
@@ -22,14 +22,14 @@ namespace OperationResult
             return new SuccessTag<TResult>(result);
         }
 
-        private static ErrorTag ErrorTag = new ErrorTag();
+        private static readonly ErrorTag _errorTag = new();
 
         /// <summary>
         /// Create "Error" Status or Result
         /// </summary>
         public static ErrorTag Error()
         {
-            return ErrorTag;
+            return _errorTag;
         }
 
         /// <summary>

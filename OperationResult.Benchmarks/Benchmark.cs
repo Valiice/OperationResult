@@ -1,5 +1,4 @@
-﻿using System;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using static OperationResult.Helpers;
 
 namespace OperationResult.Benchmarks
@@ -61,7 +60,7 @@ namespace OperationResult.Benchmarks
         {
             if (arg < SuccessRate)
             {
-                return Tuple.Create(arg, (string)null);
+                return Tuple.Create(arg, (string)null!);
             }
             return Tuple.Create(0, "Invalid Operation");
         }
@@ -86,7 +85,7 @@ namespace OperationResult.Benchmarks
             if (arg < SuccessRate)
             {
                 value = arg;
-                error = null;
+                error = null!;
                 return true;
             }
             value = 0;
@@ -100,9 +99,7 @@ namespace OperationResult.Benchmarks
             int acc = 0;
             for (int i = 0; i < 100; i++)
             {
-                int value;
-                string error;
-                if (GetOutParameters(i, out value, out error))
+                if (GetOutParameters(i, out int value, out _))
                 {
                     acc += value;
                 }

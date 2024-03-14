@@ -1,29 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>CSharp.OperationResult</AssemblyName>
-    <NoWarn>1591</NoWarn>
-  </PropertyGroup>
-  
-  <PropertyGroup>
-    <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>0.1.6</PackageVersion>
-    <PackageId>CSharp.OperationResult</PackageId>
-    <Authors>Dmitry Panyushkin</Authors>
-    <PackageIconUrl>https://raw.githubusercontent.com/gnaeus/OperationResult/master/OperationResult/icon_48x48.png</PackageIconUrl>
-    <PackageLicenseUrl>https://github.com/gnaeus/OperationResult/LICENSE</PackageLicenseUrl>
-    <Owners>gnaeus</Owners>
-    <PackageProjectUrl>https://github.com/gnaeus/OperationResult</PackageProjectUrl>
-    <PackageReleaseNotes>Fix typos</PackageReleaseNotes>
-    <Summary>Rust-style error handling for C#</Summary>
-    <PackageTags>Rust Error Functional Result Status</PackageTags>
-    <Description>Common types and helpers for represent result of some operation.</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
-  
-  <ItemGroup>
-    <None Remove="icon_48x48.png" />
-  </ItemGroup>
-  
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackOnBuild>true</PackOnBuild>
+		<PackageVersion>0.1.6</PackageVersion>
+		<PackageId>CSharp.OperationResult</PackageId>
+		<Authors>Dmitry Panyushkin</Authors>
+		<Authors>Valentin Claes</Authors>
+		<Owners>gnaeus</Owners>
+		<PackageProjectUrl>https://github.com/gnaeus/OperationResult</PackageProjectUrl>
+		<PackageReleaseNotes>Fix typos</PackageReleaseNotes>
+		<Summary>Rust-style error handling for C#</Summary>
+		<PackageTags>Rust Error Functional Result Status</PackageTags>
+		<Description>Common types and helpers for represent result of some operation.</Description>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="icon_48x48.png" />
+	</ItemGroup>
+
 </Project>
