@@ -7,5 +7,6 @@ static class Program
     static void Main()
     {
         BenchmarkRunner.Run<Benchmark>();
+        Console.ReadLine();
     }
 }
